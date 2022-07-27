@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:web_site_prototype/responsive/constants.dart';
+import 'package:web_site_prototype/responsive/desktop_layout.dart';
+import 'package:web_site_prototype/responsive/responsive_layout.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,48 +42,21 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey[700],
-        title: Text(widget.title),
+    return ResponsiveLayout(
+      desktopLayout: const DesktopLayout(),
+      smartPhoneLayout: Scaffold(
+        appBar: AppBar(),
+        drawer: Drawer(child: drawerColumn),
+        body: Container(
+          color: Colors.green,
+        ),
       ),
-      body: Row(
-        children: [
-          Drawer(
-            width: 300,
-            backgroundColor: Colors.grey[300],
-            child: Column(
-              children: [
-                const DrawerHeader(child: Icon(Icons.local_pizza_outlined)),
-                Expanded(
-                  child: ListView.separated(
-                      itemBuilder: (context, index) =>
-                          ListTile(title: Text("prova $index")),
-                      separatorBuilder: (context, index) => const Padding(
-                            padding: EdgeInsets.only(left: 16, right: 16),
-                            child: Divider(color: Colors.grey),
-                          ),
-                      itemCount: 7),
-                ),
-              ],
-            ),
-          ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Scaffold(
-                backgroundColor: Colors.blue,
-              ),
-            ),
-          ),
-          const Expanded(
-              child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Scaffold(
-              backgroundColor: Colors.amber,
-            ),
-          ))
-        ],
+      tabletLayout: Scaffold(
+        appBar: AppBar(),
+        drawer: Drawer(child: drawerColumn),
+        body: Container(
+          color: Colors.deepOrange,
+        ),
       ),
     );
   }
